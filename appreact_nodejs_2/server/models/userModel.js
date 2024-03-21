@@ -1,13 +1,16 @@
-const mongoose = require('mongoose')
-const User = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    cpf: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-},
-    { collection: 'user-data' }
-)
+// Importa o mongoose para interagir com o MongoDB
+const mongoose = require('mongoose');
 
-const model = mongoose.model('UserModel', User)
+// Define o esquema para o modelo User
+const UserSchema = new mongoose.Schema({
+    name: { type: String, required: true }, // Nome do usuário, obrigatório
+    email: { type: String, required: true, unique: true }, // Email do usuário, obrigatório e único
+    cpf: { type: String, required: true, unique: true }, // CPF do usuário, obrigatório e único
+    password: { type: String, required: true }, // Senha do usuário, obrigatória
+}, { collection: 'user-data' }); // Define o nome da coleção no banco de dados como 'user-data'
 
-module.exports = model
+// Cria o modelo UserModel a partir do esquema UserSchema
+const UserModel = mongoose.model('UserModel', UserSchema);
+
+// Exporta o modelo UserModel para ser usado em outros arquivos
+module.exports = UserModel;
